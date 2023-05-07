@@ -65,7 +65,7 @@ pipeline {
 			steps {
 				//sh "docker build -t bmuralir/currency-exchange-devops:$env.BUILD_TAG"
 				script {
-					docker.build("bmuralir/currency-exchange-devops:${env.BUILD_TAG}")
+					dockerImage = docker.build("bmuralir/currency-exchange-devops:${env.BUILD_TAG}")
 				}
 			}
 		}
