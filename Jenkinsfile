@@ -55,6 +55,31 @@ pipeline {
 				sh "mvn failsafe:integration-test failsafe:verify"
 			}
 		}
+
+		stage('Package'){
+			steps {
+				sh "mvn package -DskipTests"
+			}
+		}
+		stage('Build Docker Image'){
+			steps {
+				//sh "docker build -t bmuralir/currency-exchange-devops:$env.BUILD_TAG"
+				script {
+					docker.build("bmuralir/currency-exchange-devops:${env.BUILD_TAG}")
+				}
+			}
+		}
+
+		stage('Push Docker Image'){
+			steps {
+				script {
+					docker.withRegistry('','bmuralirDockerHub'){
+						dockerImage.push();
+						dockerImage.push('latest');
+					}
+				}
+			}
+		}
 		// stage('Test') {
 		// 	steps {
 		// 		echo "Test"
