@@ -55,16 +55,16 @@ pipeline {
 				sh "mvn failsafe:integration-test failsafe:verify"
 			}
 		}
-		stage('Test') {
-			steps {
-				echo "Test"
-			}
-		}
-		stage('Integration Test') {
-			steps {
-				echo "Integration Test"
-			}
-		}
+		// stage('Test') {
+		// 	steps {
+		// 		echo "Test"
+		// 	}
+		// }
+		// stage('Integration Test') {
+		// 	steps {
+		// 		echo "Integration Test"
+		// 	}
+		// }
 	}
 	post {
 		always {
